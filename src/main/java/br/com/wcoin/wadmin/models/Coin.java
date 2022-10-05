@@ -31,6 +31,6 @@ public class Coin {
     @Column(name="origin", length=30, nullable=true)
     private String origin;
 
-    @Column(name="symbol", length=100, nullable=false)
+    @Column(name="logo", length=100, nullable=false)
     private String logo;
 }
