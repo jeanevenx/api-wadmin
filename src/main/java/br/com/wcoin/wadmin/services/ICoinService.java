@@ -1,11 +1,13 @@
 package br.com.wcoin.wadmin.services;
 
-import br.com.wcoin.wadmin.models;
+import java.util.List;
+
+import br.com.wcoin.wadmin.models.Coin;
 
 public interface ICoinService {
-    private Coin saveCoin(Coin data);
-    private List<Coin> getAllCoin();
-    private Coin getOneCoin(integer id);
-    private Coin updateCoin(Coin data);
-    private void deleteCoin(integer id);
+    public List<Coin> getAllCoin();
+    public Coin getOneCoin(Integer id);
+    public Coin updateCoin(Coin data);
+    public void deleteCoin(Integer id);
+    public Coin saveCoin(Coin data);
 }
