@@ -31,7 +31,9 @@ public class SwaggerConfig {
             .description("API para gerenciar investimentos em criptos")
             .version("1.0.0")
             .license("Apache License Version 2.0")
-            .contact(new Contact("Jean Evenx Joseph", "https://github.com/jeanevenx/api-wadmin", "jeanlovenx@gmail.com"))
+            .contact(new Contact("Desenvolvido por Jean Evenx Joseph", 
+            		"https://github.com/jeanevenx/api-wadmin", 
+            		"jeanlovenx@gmail.com"))
             .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
             .build();
         
