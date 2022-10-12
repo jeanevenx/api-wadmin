@@ -3,11 +3,12 @@ package br.com.wcoin.wadmin.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import br.com.wcoin.wadmin.models.Coin;
 import br.com.wcoin.wadmin.models.User;
 import br.com.wcoin.wadmin.repositories.UserRepository;
 
+@Service
 public class UserServiceImpl implements IUserService {
 	
 	@Autowired
@@ -34,13 +35,15 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void deleteUser(Integer id) {
-		// TODO Auto-generated method stub
+		repo.deleteById(id);
 		
 	}
 
 	@Override
 	public User saveUser(User data) {
-		// TODO Auto-generated method stub
+		if(data.getName() != null && data.getPassword()!= null) {
+			return repo.save(data);
+		}
 		return null;
 	}
     
