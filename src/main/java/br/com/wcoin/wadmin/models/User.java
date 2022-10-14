@@ -1,11 +1,17 @@
 package br.com.wcoin.wadmin.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="user")
@@ -28,8 +34,12 @@ public class User {
     @Column(name="password", nullable=false)
     private String password;
 
-    @Column(name="avatar", nullable=false)
+    @Column(name="avatar", nullable=false, columnDefinition = "TEXT")
     private String avatar;
+    
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<Coin> coins;
 
 	public Integer getId() {
 		return id;
@@ -77,6 +87,14 @@ public class User {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public List<Coin> getCoins() {
+		return coins;
+	}
+
+	public void setCoins(List<Coin> coins) {
+		this.coins = coins;
 	}
     
     
