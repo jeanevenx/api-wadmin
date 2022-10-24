@@ -17,15 +17,13 @@ public class CoinTests {
         coin.setName("Bitcoin");
         coin.setQuantity(158.658425);
         coin.setSymbol("BTC");
-        coin.setOrigin("Binance");
-        coin.setLogo("http://bit.logo");
+        coin.setMarket("Binance");
 
         assertEquals(1, coin.getId());
         assertEquals("Bitcoin", coin.getName());
         assertEquals(158.658425, coin.getQuantity());
         assertEquals("BTC", coin.getSymbol());
-        assertEquals("Binance", coin.getOrigin());
-        assertEquals("http://bit.logo", coin.getLogo());
+        assertEquals("Binance", coin.getMarket());
         
     }
     

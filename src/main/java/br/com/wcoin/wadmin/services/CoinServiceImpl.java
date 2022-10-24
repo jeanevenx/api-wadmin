@@ -41,7 +41,12 @@ public class CoinServiceImpl implements ICoinService {
 
 	@Override
 	public Coin saveCoin(Coin data) {
-		return repo.save(data);
+		
+		if(data != null) {
+			return repo.save(data);
+			
+		}
+		return null;
 	}
     
 }

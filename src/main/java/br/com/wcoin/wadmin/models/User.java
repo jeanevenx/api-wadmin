@@ -1,47 +1,83 @@
 package br.com.wcoin.wadmin.models;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="user")
+@Table(name="users",
+uniqueConstraints = {
+    @UniqueConstraint(columnNames = "username"),
+	@UniqueConstraint(columnNames = "email")
+})
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id", nullable=false)
+    @Column(name="user_id")
     private Integer id;
 
-    @Column(name="name", nullable=false)
+    @Column(name="name", nullable=true)
     private String name;
 
-    @Column(name="username", nullable=true, unique=true)
+    @Column(name="username", nullable=false, unique=true)
     private String username;
 
     @Column(name="email", nullable=false, unique=true)
     private String email;
 
-    @Column(name="password", nullable=false)
+    @Column(name="password", nullable=true)
     private String password;
 
-    @Column(name="avatar", nullable=false, columnDefinition = "TEXT")
+    @Column(name="avatar", nullable=true, columnDefinition = "TEXT")
     private String avatar;
     
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<Coin> coins;
 
-	public Integer getId() {
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "user_roles",
+        joinColumns = @JoinColumn(name="user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<Role>();
+
+	public User() {
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Integer getId() {
 		return id;
 	}
 
@@ -96,8 +132,5 @@ public class User {
 	public void setCoins(List<Coin> coins) {
 		this.coins = coins;
 	}
-    
-    
-
-    
+      
 }

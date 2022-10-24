@@ -1,5 +1,7 @@
 package br.com.wcoin.wadmin.models;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,13 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
 @Entity
-@Table(name="coin")
+@Table(name="coins")
 public class Coin {
     
     @Id
@@ -25,23 +26,53 @@ public class Coin {
     @Column(name="name", length=100, nullable=false)
     private String name;
 
+    @Column(name="operation", length=50, nullable=false)
+    private String operation;
+	// purchases - sales - transfers
+
+	@Column(name="date", length=50, nullable=false)
+    private LocalDate date;
+
     @Column(name="quantity", nullable=false)
     private Double quantity;
 
-    @Column(name="symbol", length=30, nullable=false)
+	@Column(name="symbol", length=30, nullable=false)
     private String symbol;
 
-    @Column(name="origin", length=30, nullable=true)
-    private String origin;
-
-    @Column(name="logo", length=100, nullable=false)
-    private String logo;
+    @Column(name="market", length=30, nullable=true)
+    private String market;
 
 	@ManyToOne
-    @JoinColumn(name="user_id")
-    @JsonIgnoreProperties("coins")
-    private User user;
-    
+   	@JoinColumn(name="user_id")
+  	@JsonIgnoreProperties("coins")
+   	private User user;
+
+
+
+    public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation.toLowerCase();
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public String getMarket() {
+		return market;
+	}
+
+	public void setMarket(String market) {
+		this.market = market;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -81,24 +112,5 @@ public class Coin {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-
-	public String getOrigin() {
-		return origin;
-	}
-
-	public void setOrigin(String origin) {
-		this.origin = origin;
-	}
-
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-    
-    
-    
     
 }
