@@ -18,7 +18,7 @@ public class SwaggerConfig {
         
         return new Docket(DocumentationType.SWAGGER_2)
                     .select()
-                    .apis(RequestHandlerSelectors.basePackage("br.com.wcoin.wadmin.controllers"))
+                    .apis(RequestHandlerSelectors.basePackage("br.com.wcoin.wadmin"))
                     .build()
                     .useDefaultResponseMessages(false)
                     .apiInfo(apiInfo());
@@ -32,7 +32,7 @@ public class SwaggerConfig {
             .version("1.0.0")
             .license("Apache License Version 2.0")
             .contact(new Contact("Jean Evenx Joseph", 
-            		"https://github.com/jeanevenx/api-wadmin", 
+            		"https://www.linkedin.com/in/jeanevenx/", 
             		"jeanlovenx@gmail.com"))
             .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
             .build();
